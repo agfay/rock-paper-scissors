@@ -17,8 +17,7 @@ function getComputerRoll () {
     };
 }
 
-let humanScore = 0;
-let computerScore = 0;
+
 
 function playRound(humanChoice, computerChoice) {
 
@@ -28,38 +27,49 @@ function playRound(humanChoice, computerChoice) {
 
     if(humanChoice == computerChoice){
         console.log("Tie");
-        return;
+        return(0);
     } else if (humanChoice.charAt(0)+computerChoice.charAt(0) == "rp") {
-        computerScore++;
         console.log("You lose");
-        return;
+        return(2);
     } else if (humanChoice.charAt(0)+computerChoice.charAt(0) == "rs") {
-        humanScore++;
         console.log("You win");
-        return;
+        return(1);
     } else if (humanChoice.charAt(0)+computerChoice.charAt(0) == "pr") {
-        humanScore++;
         console.log("You win");
-        return;
+        return(1);
     } else if (humanChoice.charAt(0)+computerChoice.charAt(0) == "ps") {
-        computerScore++;
         console.log("You lose");
-        return;
+        return(2);
     } else if (humanChoice.charAt(0)+computerChoice.charAt(0) == "sr") {
-        computerScore++;
         console.log("You lose");
-        return;
+        return(2);
     } else if (humanChoice.charAt(0)+computerChoice.charAt(0) == "sp") {
-        humanScore++;
         console.log("You win");
-        return;
+        return(1);
     } else {
         return("error in playRound")
     }
 }
 
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0; 
 
-const humanSelection = getHumanRoll();
-const computerSelection = getComputerRoll();
+    for(let i=0; i < 5; i++) {
+       let outcome = playRound(getHumanRoll(), getComputerRoll());
+       
+       if (outcome == 1) {
+        humanScore++;
+       } else if (outcome == 2) {
+        computerScore++;
+       } else {
+        continue;
+       }
+    }
 
-playRound(humanSelection, computerSelection);
+    return([humanScore, computerScore]);
+}
+
+let [a,b] = playGame();
+console.log("Human score: " + a);
+console.log("Computer score: " + b);
