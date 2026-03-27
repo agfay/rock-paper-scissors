@@ -10,7 +10,13 @@ function getComputerRoll () {
     return("scissors")
     } else {
     return("error in computerRoll")
-    }
+    };
 }
 
-console.log(getComputerRoll())
+function getHumanRoll () {
+    let humanChoice = prompt("Enter your roll (rock, paper, scissors):");
+    return(humanChoice);
+}
+
+console.log(getComputerRoll());
+console.log(getHumanRoll());
